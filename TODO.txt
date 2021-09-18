@@ -1,0 +1,143 @@
+buat module 'sekolah' dengan:
+1. table untuk siswa: id, nama_siswa, kelas
+2. table untuk mata pelajaran : id, nama_pelajaran
+3. table untuk t_ujian : id, tgl_ujian, siswa_id, rata_rata
+4. table untuk t_ujian_det : id, ujian_id, mata_pelajaran_id, nilai
+
+Tampilan Menu:
+Top menu: Sekolah
+Left menu: 
+Sekolah
+-> Siswa
+-> Mata Pelajaran
+-> Ujian
+Siswa Layout:
+=============
+Nama   [_______________]
+Kelas  [_______|V]
+catatan: nama harus diisi/required, kelas sebagai combo selection, isinya: I, II, III
+
+Mata Pelajaran Layout:
+======================
+Nama Pelajaran [_________________]
+catatan : nama pelajaran harus diisi/required
+Ujian Layout:
+=============
+Tgl ujian  [           |D]
+Siswa      [           |P]
+| Mata pelajaran  |   Nilai  |
+------------------------------
+|                 |          |
+------------------------------
+Rata2      [             ]
+catatan : tgl ujian berupa input tanggal, siswa berupa many2one, list mata pelajaran dan nilai berupa one2many,
+rata2 berupa fields.function dgn type integer (sum nilai di t_ujian_det / count mata pelajaran di t_ujian_det)
+5. create wizard untuk mengubah kelas dari siswa-siswa:
+Dari list siswa, centang 1 atau lebih siswa, klik action menu "Ubah kelas".
+Ubah kelas wizard layout:
+========================
+Kelas [_______|V]
+[Simpan] [Batal]
+catatan: kelas harus diisi, saat klik simpan, update kelas dari semua siswa yg diselect sebelumnya.
+6. buat module baru 'sekolah_custom', depends 'sekolah', 
+catatan: selanjutnya task di bawah dikerjakan di modul 'sekolah_custom'
+7. table untuk ekstrakur: id, nama_ekstrakur, m2m(siswa)
+Ekstrakurikuler Layout:
+========================
+Nama Ekstrakurikuler [_________________]
+| Siswa           |   
+-------------------
+|                 |
+-------------------
+Update untuk Siswa Layout
+=========================
+Nama   [_______________]
+Kelas  [_______|V]
+| Ekstrakurikuler |   
+-------------------
+|                 |
+-------------------
+8. create wizard untuk tambah ekstrakurikuler dari siswa-siswa:
+Dari list siswa, centang 1 atau lebih siswa, klik action menu "Tambah ekstrakurikuler".
+Tambah ekstrakurikuler wizard layout:
+====================================
+Ekstrakurikuler [_______|P]
+[Simpan] [Batal]
+catatan: Ekstrakurikuler berupa m2o, harus diisi, saat klik simpan, add ekstrakurikuler ke list ekstrakurikuler
+dari semua siswa yg diselect sebelumnya ( hanya ekstrakurikuler yg belum pernah ada yg ditambahkan )
+9. table untuk trainer: id, nama_trainer
+Trainer Layout:
+===============
+Nama trainer [_________________]
+10. table untuk evaluasi: id, ekstrakur_id, trainer_id, o2m(evaluasi_det), rata_rata
+11. table untuk evaluasi_det: id, evaluasi_id, siswa_id, nilai
+Evaluasi Layout:
+================
+Ekstrakurikuler [_____________|P]
+Trainer         [_____________|P]
+Rata-rata       [               ]
+| Siswa  |   Nilai  |
+---------------------
+|        |          |
+---------------------
+catatan: 
+- ekstrakur_id, trainer_id harus diisi
+- siswa_id harus diisi
+- dari klik menu evaluasi, munculkan list evaluasi dengan kolom ekstrakur, trainer, rata2.
+  untuk rata2 dibawah 60, tampilkan baris dengan tulisan warna merah
+- di form evaluasi, semua field dibuat readonly
+- evaluasi hanya bisa diisi lewat wizard ( lihat #12 )
+12. create wizard untuk create evaluasi dan evaluasi_det
+di form view dari ekstrakurikuler, tambahkan button "Generate evaluasi" di samping "Nama Ekstrakurikuler"
+saat diklik, munculkan wizard
+Generate Evaluasi wizard Layout:
+================================
+Ekstrakurikuler [ Basket      |P]
+Trainer         [_____________|P]
+| Siswa  |   Nilai  |
+---------------------
+| ABC    |       0  |
+---------------------
+| XYZ    |       0  |
+---------------------
+[Generate] [Batal]
+catatan: 
+- Ekstrakurikuler dan list siswa+nilai terisi otomatis sesuai dengan ekstrakur yg dipilih dan readonly
+- trainer harus diisi
+- list siswa, siswa readonly, nilai diset 0 by default, user edit isi nilai langsung dari list (bukan lewat form popup)
+- klik generate, create evaluasi dan evaluasi_det
+13. di akhir wizard #12, tampilkan form evaluasi yang baru digenerate
+14. di modul sekolah, untuk t_ujian, saat add/update, tambahkan validasi: tgl_ujian harus <= today,
+bila tgl_ujian > today, munculkan pesan "Tanggal ujian harus <= $today" $today berisi tanggal hari ini dgn format, ex: 24 July 2014
+15. buat report dari list trainer, centang 1 atau lebih trainer, klik action menu 'Laporan Trainer'
+Tampilan semua extrakurikuler yg dilatih oleh trainer beserta nilai and rata2
+Trainer:  Baresi
++----------------------------------------------+
+| Ekstrakurikuler : Sepakbola                  |
++------------------------------+---------------+
+| Lorenzo                      |            85 |
+| Yeremia                      |            85 |
+| Wayne Rooney                 |            75 |
++------------------------------+---------------+
+                               |            81 |
+                               +---------------+
++----------------------------------------------+
+| Ekstrakurikuler : Basket                     |
++----------------------------------------------+
+| Lorenzo                      |            85 |
+| Yeremia                      |            85 |
+| Lebron Jame                  |            85 |
++------------------------------+---------------+
+                               |            85 |
+                               +---------------+
+---halaman baru untuk tiap trainer---
+Trainer:  Magnus Carlsen
++----------------------------------------------+
+| Ekstrakurikuler : Catur                      |
++------------------------------+---------------+
+| Garry Kasparov               |            95 |
+| Anatoly Karpov               |            85 |
+| V. Anand                     |            90 |
++------------------------------+---------------+
+                               |            90 |
+                               +---------------+

@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+
+    <record id="siswa_view_tree" model="ir.ui.view">
+      <field name="name">sekolah.siswa.tree</field>
+      <field name="model">sekolah.siswa</field>
+      <field name="arch" type="xml">
+        <tree string="Siswa">
+          <field name="nama" />
+          <field name="kelas" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="siswa_view_form" model="ir.ui.view">
+      <field name="name">sekolah.siswa.form</field>
+      <field name="model">sekolah.siswa</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <field name="nama" />
+              <field name="kelas" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="siswa_action_view" model="ir.actions.act_window">
+      <field name="name">Siswa</field>
+      <field name="res_model">sekolah.siswa</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            create your first siswa!
+        </p>
+      </field>
+    </record>
+
+    <menuitem id="siswa_menu" name="Siswa" action="siswa_action_view" parent="sekolah.menu_root" sequence="10"/>
+
+  </data>
+</odoo>

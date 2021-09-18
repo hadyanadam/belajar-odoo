@@ -1,0 +1,11 @@
+FROM odoo:latest
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+USER root
+
+RUN pip3 install debugpy
+RUN chmod 777 -R /mnt/extra-addons
+
+USER odoo

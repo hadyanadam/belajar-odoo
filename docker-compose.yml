@@ -1,0 +1,36 @@
+version: "3.1"
+services:
+  odoo:
+    # image: odoo:14.0
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    command: -- -u sekolah -u sekolah_custom
+    depends_on:
+      - db
+    ports:
+      - "8170:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      # - ./odoo:/usr/lib/python3/dist-packages/odoo
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_PORT=5431
+      - PGDATA=/var/lib/postgresql/data/PGDATA
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:

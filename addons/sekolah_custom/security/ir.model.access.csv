@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sekolah_custom_ekstrakur,access.sekolah_custom.ekstrakur,model_sekolah_custom_ekstrakur,,1,1,1,1
+access_sekolah_custom_trainer,access.sekolah_custom.trainer,model_sekolah_custom_trainer,,1,1,1,1
+access_sekolah_custom_evaluasi,access.sekolah_custom.evaluasi,model_sekolah_custom_evaluasi,,1,1,1,1
+access_sekolah_custom_evaluasi_det,access.sekolah_custom.evaluasi_det,model_sekolah_custom_evaluasi_det,,1,1,1,1
+access_sekolah_custom_tambah_ekstrakur_wizard,access.sekolah_custom.tambah_ekstrakur_wizard,model_sekolah_custom_tambah_ekstrakur_wizard,,1,1,1,1
+access_sekolah_custom_generate_evaluasi_wizard,access.sekolah_custom.generate_evaluasi_wizard,model_sekolah_custom_generate_evaluasi_wizard,,1,1,1,1
+access_sekolah_custom_evaluasi_det_transient,access.sekolah_custom.evaluasi_det_transient,model_sekolah_custom_evaluasi_det_transient,,1,1,1,1

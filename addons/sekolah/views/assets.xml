@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <template id="assets" name="sekolah assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/sekolah/static/src/js/test.js"/>
+        </xpath>
+    </template>
+    
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="sekolah_custom_tambah_ekstrakur_wizard_form" model="ir.ui.view">
+            <field name="name">sekolah_custom.ekstrakur.wizard.form</field>
+            <field name="model">sekolah_custom.tambah_ekstrakur_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Tambah Ekstrakurikuler">
+                    <sheet>
+                        <group>
+                            <field name="nama" options="{'no_quick_create': True}"/>
+                        </group>
+                        <footer>
+                            <button name="tambah_ekstrakur" string="Simpan" type="object" class="oe_highlight"/>
+                            <button string="Batal" class="btn btn-default" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sekolah_custom_tambah_ekstrakur_action_server" model="ir.actions.server">
+            <field name="name">Tambah Ekstrakur</field>
+            <field name="model_id" ref="sekolah_custom.model_sekolah_custom_tambah_ekstrakur_wizard"/>
+            <field name="binding_model_id" ref="sekolah.model_sekolah_siswa"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">action = model.tambah_ekstrakur_form()</field>
+        </record>
+
+        <record id="sekolah_custom_tambah_ekstrakur_action" model="ir.actions.act_window">
+            <field name="name">Tambah Ekstrakur</field>
+            <field name="res_model">sekolah_custom.tambah_ekstrakur_wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+
+
+</odoo>

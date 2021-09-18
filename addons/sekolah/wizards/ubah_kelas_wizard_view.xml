@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="ubah_kelas_view_form" model="ir.ui.view">
+            <field name="name">sekolah.ubah_kelas.wizard.form</field>
+            <field name="model">ubah_kelas.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Ubah Kelas Form">
+                    <group>
+                        <field name="kelas" />
+                    </group>
+                    <footer>
+                        <button name="ubah_kelas" string="Simpan" type="object" class="oe_highlight"/>
+                        <button string="Batal" class="btn btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="ubah_kelas_action_server" model="ir.actions.server">
+            <field name="name">Ubah Kelas</field>
+            <field name="model_id" ref="sekolah.model_ubah_kelas_wizard"/>
+            <field name="binding_model_id" ref="sekolah.model_sekolah_siswa"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">action = model.ubah_kelas_form()</field>
+        </record>
+
+
+        <record id="ubah_kelas_wizard_action" model="ir.actions.act_window">
+            <field name="name">Ubah Kelas</field>
+            <field name="res_model">ubah_kelas.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+
+
+</odoo>

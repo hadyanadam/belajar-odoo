@@ -1,0 +1,7 @@
+<odoo>
+  <data>
+
+    <menuitem name="Sekolah" id="sekolah.menu_root"/>
+
+  </data>
+</odoo>
